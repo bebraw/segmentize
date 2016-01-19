@@ -2,7 +2,7 @@
   "name": "segmentize",
   "description": "Simple segmentation useful for pagination",
   "author": "Juho Vepsalainen <bebraw@gmail.com>",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "test": "mocha ./test",
     "test:watch": "mocha ./test --watch",
