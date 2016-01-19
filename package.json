@@ -1,0 +1,36 @@
+{
+  "name": "segmentize",
+  "description": "Simple segmentation useful for pagination",
+  "author": "Juho Vepsalainen <bebraw@gmail.com>",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "mocha ./test",
+    "test:watch": "mocha ./test --watch",
+    "test:lint": "eslint .",
+    "preversion": "npm run test && npm run test:lint"
+  },
+  "main": "./index.js",
+  "dependencies": {
+    "intersect": "^1.0.1",
+    "uniq": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^3.1.0",
+    "mocha": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bebraw/segmentize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bebraw/segmentize/issues"
+  },
+  "keywords": [
+    "segment",
+    "segments",
+    "pagination"
+  ],
+  "license": "MIT"
+}
