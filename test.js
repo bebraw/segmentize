@@ -1,5 +1,7 @@
 /* eslint-env mocha */
 const expect = require('chai').expect;
+const jsc = require('jsverify');
+const intersect = require('intersect');
 const segmentize = require('./');
 
 describe('segmentize', function () {
@@ -347,5 +349,22 @@ describe('segmentize', function () {
       [3, 4, 5, 6, 7],
       [13, 14]
     ]);
+  });
+
+  it('should not intersect', function () {
+    const property = jsc.forall(jsc.nat(), jsc.nat(), function (a, b) {
+      const max = Math.max(a, b);
+      const min = Math.min(a, b);
+
+      return !intersect.apply(null, segmentize({
+        page: min,
+        pages: max,
+        sidePages: min,
+        beginPages: min,
+        endPages: min
+      })).length;
+    });
+
+    jsc.assert(property);
   });
 });

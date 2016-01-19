@@ -18,6 +18,7 @@
     "chai": "^3.4.1",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^3.1.0",
+    "jsverify": "^0.7.1",
     "mocha": "^2.3.4"
   },
   "repository": {
