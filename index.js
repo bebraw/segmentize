@@ -26,7 +26,9 @@ module.exports = function (o) {
       }
       beginPages = uniq(beginPages.concat(rightSidePages));
 
-      return [beginPages, difference(endPages, beginPages)].filter((a) => a.length);
+      return [beginPages, difference(endPages, beginPages)].filter(function (a) {
+        return a.length;
+      });
     }
 
     return [[0]];
@@ -36,7 +38,9 @@ module.exports = function (o) {
     endPages = [pages - 2, pages - 1];
     endPages = uniq(endPages.concat(leftSidePages));
 
-    return [beginPages, difference(endPages, beginPages)].filter((a) => a.length);
+    return [beginPages, difference(endPages, beginPages)].filter(function (a) {
+      return a.length;
+    });
   }
 
   center = [].concat(leftSidePages, [page], rightSidePages);
@@ -59,7 +63,9 @@ module.exports = function (o) {
 
   if (!center.length &&
       beginPages.length === endPages.length &&
-      beginPages.every((p, i) => p === endPages[i])) {
+      beginPages.every(function (p, i) {
+        return p === endPages[i];
+      })) {
     return [beginPages];
   }
 
@@ -78,7 +84,9 @@ module.exports = function (o) {
     return [beginPages, center.concat(endPages)];
   }
 
-  return [beginPages, center, endPages].filter((a) => a.length);
+  return [beginPages, center, endPages].filter(function (a) {
+    return a.length;
+  });
 };
 
 function range(a, b) {
@@ -94,5 +102,7 @@ function range(a, b) {
 }
 
 function difference(a, b) {
-  return a.filter((v) => b.indexOf(v) < 0);
+  return a.filter(function (v) {
+    return b.indexOf(v) < 0;
+  });
 }
