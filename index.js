@@ -11,9 +11,9 @@ module.exports = function (o) {
   const rightSidePages = o.sidePages ?
     range(page + 1, Math.min(page + o.sidePages + 1, pages)) :
     [page + 1];
-  let beginPages = o.beginPages ? range(Math.min(o.beginPages, pages)) : [];
-  let endPages = o.endPages ? range(Math.max(pages - o.endPages, 0), pages) : [];
-  let center;
+  var beginPages = o.beginPages ? range(Math.min(o.beginPages, pages)) : [];
+  var endPages = o.endPages ? range(Math.max(pages - o.endPages, 0), pages) : [];
+  var center;
 
   if (beginPages.length + endPages.length >= pages) {
     return [range(pages)];
@@ -84,7 +84,7 @@ module.exports = function (o) {
 function range(a, b) {
   const len = b ? b : a;
   const ret = [];
-  let i = b ? a : 0;
+  var i = b ? a : 0;
 
   for (; i < len; i++) {
     ret.push(i);

@@ -17,6 +17,7 @@
     "no-undef": [2],
     "no-undefined": 1,
     "no-use-before-define": 0,
+    "no-var": 0,
     "object-shorthand": 0,
     // http://eslint.org/docs/rules/prefer-const
     "prefer-const": 1,
