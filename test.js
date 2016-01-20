@@ -11,9 +11,13 @@ describe('segmentize', function () {
     expect(segmentize({
       page: 0,
       pages: pageAmount
-    })).to.deep.equal([
-      [0]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [],
+      endPages: []
+    });
   });
 
   it('should show only two pages if there are two', function () {
@@ -22,9 +26,13 @@ describe('segmentize', function () {
     expect(segmentize({
       page: 0,
       pages: pageAmount
-    })).to.deep.equal([
-      [0, 1]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [1],
+      endPages: []
+    });
   });
 
   it('should show current and next at start by default', function () {
@@ -33,9 +41,13 @@ describe('segmentize', function () {
     expect(segmentize({
       page: 0,
       pages: pageAmount
-    })).to.deep.equal([
-      [0, 1]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [1],
+      endPages: []
+    });
   });
 
   it('should show current and previous at end by default', function () {
@@ -44,9 +56,13 @@ describe('segmentize', function () {
     expect(segmentize({
       page: pageAmount - 1,
       pages: pageAmount
-    })).to.deep.equal([
-      [pageAmount - 2, pageAmount - 1]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [pageAmount - 2],
+      centerPage: pageAmount - 1,
+      nextPages: [],
+      endPages: []
+    });
   });
 
   it('should show only current if there is only one page', function () {
@@ -55,9 +71,13 @@ describe('segmentize', function () {
     expect(segmentize({
       page: 0,
       pages: pageAmount
-    })).to.deep.equal([
-      [0]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [],
+      endPages: []
+    });
   });
 
   it('should show both previous and next page if at center', function () {
@@ -66,9 +86,13 @@ describe('segmentize', function () {
     expect(segmentize({
       page: 5,
       pages: pageAmount
-    })).to.deep.equal([
-      [4, 5, 6]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [4],
+      centerPage: 5,
+      nextPages: [6],
+      endPages: []
+    });
   });
 
   it('should accept begin pages', function () {
@@ -78,23 +102,29 @@ describe('segmentize', function () {
       page: 5,
       pages: pageAmount,
       beginPages: 2
-    })).to.deep.equal([
-      [0, 1],
-      [4, 5, 6]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1],
+      previousPages: [4],
+      centerPage: 5,
+      nextPages: [6],
+      endPages: []
+    });
   });
 
-  it('should accept begin pages and end page', function () {
+  it('should accept begin pages at end', function () {
     const pageAmount = 10;
 
     expect(segmentize({
       page: pageAmount - 1,
       pages: pageAmount,
       beginPages: 2
-    })).to.deep.equal([
-      [0, 1],
-      [pageAmount - 2, pageAmount - 1]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1],
+      previousPages: [pageAmount - 2],
+      centerPage: pageAmount - 1,
+      nextPages: [],
+      endPages: []
+    });
   });
 
   it('should accept begin pages with overlap', function () {
@@ -104,9 +134,13 @@ describe('segmentize', function () {
       page: 2,
       pages: pageAmount,
       beginPages: 2
-    })).to.deep.equal([
-      [0, 1, 2, 3]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1],
+      previousPages: [],
+      centerPage: 2,
+      nextPages: [3],
+      endPages: []
+    });
   });
 
   it('should accept end pages', function () {
@@ -116,10 +150,13 @@ describe('segmentize', function () {
       page: 5,
       pages: pageAmount,
       endPages: 2
-    })).to.deep.equal([
-      [4, 5, 6],
-      [8, 9]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [4],
+      centerPage: 5,
+      nextPages: [6],
+      endPages: [8, 9]
+    });
   });
 
   it('should accept first page and end pages', function () {
@@ -129,10 +166,13 @@ describe('segmentize', function () {
       page: 0,
       pages: pageAmount,
       endPages: 2
-    })).to.deep.equal([
-      [0, 1],
-      [8, 9]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [1],
+      endPages: [8, 9]
+    });
   });
 
   it('should accept end pages with overlap', function () {
@@ -142,9 +182,13 @@ describe('segmentize', function () {
       page: pageAmount - 3,
       pages: pageAmount,
       endPages: 2
-    })).to.deep.equal([
-      [6, 7, 8, 9]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [pageAmount - 4],
+      centerPage: pageAmount - 3,
+      nextPages: [],
+      endPages: [pageAmount - 2, pageAmount - 1]
+    });
   });
 
   it('should accept both begin and end pages', function () {
@@ -155,11 +199,13 @@ describe('segmentize', function () {
       pages: pageAmount,
       beginPages: 2,
       endPages: 2
-    })).to.deep.equal([
-      [0, 1],
-      [4, 5, 6],
-      [8, 9]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1],
+      previousPages: [4],
+      centerPage: 5,
+      nextPages: [6],
+      endPages: [8, 9]
+    });
   });
 
   it('should show only one page if there is one with both begin and end pages', function () {
@@ -170,36 +216,44 @@ describe('segmentize', function () {
       pages: pageAmount,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [],
+      endPages: []
+    });
   });
 
   it('should show only two pages if there are two with both begin and end pages', function () {
-    const pageAmount = 2;
-
     expect(segmentize({
       page: 0,
-      pages: pageAmount,
+      pages: 2,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [],
+      endPages: [1]
+    });
   });
 
   it('should show only two pages if there are two with both begin and end pages ' +
       'and latter is selected', function () {
-    const pageAmount = 2;
-
     expect(segmentize({
       page: 1,
-      pages: pageAmount,
+      pages: 2,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0],
+      previousPages: [],
+      centerPage: 1,
+      nextPages: [],
+      endPages: []
+    });
   });
 
   it('should segmentize #1 correctly', function () {
@@ -208,9 +262,13 @@ describe('segmentize', function () {
       pages: 3,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1, 2]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0],
+      previousPages: [],
+      centerPage: 1,
+      nextPages: [],
+      endPages: [2]
+    });
   });
 
   it('should segmentize #2 correctly', function () {
@@ -219,9 +277,13 @@ describe('segmentize', function () {
       pages: 3,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1, 2]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [],
+      endPages: [1, 2]
+    });
   });
 
   it('should segmentize 6 pages correctly when 4th page is selected', function () {
@@ -230,9 +292,13 @@ describe('segmentize', function () {
       pages: 6,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1, 2, 3, 4, 5]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1, 2],
+      previousPages: [],
+      centerPage: 3,
+      nextPages: [],
+      endPages: [4, 5]
+    });
   });
 
   it('should segmentize #6 correctly', function () {
@@ -241,10 +307,13 @@ describe('segmentize', function () {
       pages: 11,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1, 2],
-      [7, 8, 9, 10]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1, 2],
+      previousPages: [7],
+      centerPage: 8,
+      nextPages: [],
+      endPages: [9, 10]
+    });
   });
 
   it('should segmentize start correctly', function () {
@@ -253,34 +322,45 @@ describe('segmentize', function () {
       pages: 11,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1, 2, 3],
-      [8, 9, 10]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1],
+      previousPages: [],
+      centerPage: 2,
+      nextPages: [3],
+      endPages: [8, 9, 10]
+    });
   });
 
-  it('should segmentize #9 correctly', function () {
+  it('should segmentize #9 correctly, part 1', function () {
     // given there's overlap between begin and end, this should merge
     expect(segmentize({
       page: 3,
       pages: 7,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1, 2, 3, 4, 5, 6]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1, 2],
+      previousPages: [],
+      centerPage: 3,
+      nextPages: [],
+      endPages: [4, 5, 6]
+    });
   });
 
   it('should segmentize #9 correctly, part 2', function () {
-    // given begin and end are right after each other, this should merge
+    // given begin and end are next after each other, this should merge
     expect(segmentize({
       page: 4,
       pages: 7,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1, 2, 3, 4, 5, 6]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1, 2],
+      previousPages: [3],
+      centerPage: 4,
+      nextPages: [],
+      endPages: [5, 6]
+    });
   });
 
   it('should segmentize ten items correctly at start', function () {
@@ -289,10 +369,13 @@ describe('segmentize', function () {
       pages: 10,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1, 2, 3, 4, 5],
-      [7, 8, 9]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1, 2],
+      previousPages: [3],
+      centerPage: 4,
+      nextPages: [5],
+      endPages: [7, 8, 9]
+    });
   });
 
   it('should segmentize ten items correctly at end', function () {
@@ -301,10 +384,13 @@ describe('segmentize', function () {
       pages: 10,
       beginPages: 3,
       endPages: 3
-    })).to.deep.equal([
-      [0, 1, 2],
-      [4, 5, 6, 7, 8, 9]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1, 2],
+      previousPages: [4],
+      centerPage: 5,
+      nextPages: [6],
+      endPages: [7, 8, 9]
+    });
   });
 
   it('should accept side pages number', function () {
@@ -312,9 +398,13 @@ describe('segmentize', function () {
       page: 5,
       pages: 15,
       sidePages: 2
-    })).to.deep.equal([
-      [3, 4, 5, 6, 7]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [3, 4],
+      centerPage: 5,
+      nextPages: [6, 7],
+      endPages: []
+    });
   });
 
   it('should accept side pages number for the first page', function () {
@@ -322,9 +412,13 @@ describe('segmentize', function () {
       page: 0,
       pages: 15,
       sidePages: 3
-    })).to.deep.equal([
-      [0, 1, 2, 3]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [1, 2, 3],
+      endPages: []
+    });
   });
 
   it('should accept side pages number for the last page', function () {
@@ -332,9 +426,13 @@ describe('segmentize', function () {
       page: 14,
       pages: 15,
       sidePages: 3
-    })).to.deep.equal([
-      [11, 12, 13, 14]
-    ]);
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [11, 12, 13],
+      centerPage: 14,
+      nextPages: [],
+      endPages: []
+    });
   });
 
   it('should accept side pages number', function () {
@@ -344,11 +442,13 @@ describe('segmentize', function () {
       sidePages: 2,
       beginPages: 2,
       endPages: 2
-    })).to.deep.equal([
-      [0, 1],
-      [3, 4, 5, 6, 7],
-      [13, 14]
-    ]);
+    })).to.deep.equal({
+      beginPages: [0, 1],
+      previousPages: [3, 4],
+      centerPage: 5,
+      nextPages: [6, 7],
+      endPages: [13, 14]
+    });
   });
 
   it('should not intersect', function () {
@@ -356,15 +456,21 @@ describe('segmentize', function () {
       const max = Math.max(a, b);
       const min = Math.min(a, b);
 
-      return !intersect.apply(null, segmentize({
+      return !intersect.apply(null, values(segmentize({
         page: min,
         pages: max,
         sidePages: min,
         beginPages: min,
         endPages: min
-      })).length;
+      }))).length;
     });
 
     jsc.assert(property);
   });
 });
+
+function values (o) {
+  return Object.keys(o).map(function (k) {
+    return Array.isArray(o[k]) ? o[k] : [o[k]];
+  });
+}

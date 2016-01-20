@@ -10,14 +10,12 @@
     "preversion": "npm run test && npm run test:lint"
   },
   "main": "./index.js",
-  "dependencies": {
-    "intersect": "^1.0.1",
-    "uniq": "^1.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "chai": "^3.4.1",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^3.1.0",
+    "intersect": "^1.0.1",
     "jsverify": "^0.7.1",
     "mocha": "^2.3.4"
   },
