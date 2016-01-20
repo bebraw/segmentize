@@ -469,7 +469,7 @@ describe('segmentize', function () {
   });
 });
 
-function values (o) {
+function values(o) {
   return Object.keys(o).map(function (k) {
     return Array.isArray(o[k]) ? o[k] : [o[k]];
   });
