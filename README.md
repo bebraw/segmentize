@@ -17,6 +17,10 @@ expect(segmentize({
 
 See `./test.js` for more examples.
 
+## Contributors
+
+* [Artem Sapegin](https://github.com/sapegin) - `const` -> `var`. Safari needs this to work.
+
 ## License
 
 *segmentize* is available under MIT. See LICENSE for more details.
