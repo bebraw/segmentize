@@ -2,28 +2,16 @@
 
 module.exports = function (o) {
   var pages = o.pages;
-  var page = Math.min(Math.max(o.page, 0), pages - 1);
+  var page = Math.min(Math.max(o.page, 1), pages);
   var previousPages = o.sidePages ?
-    range(Math.max(page - o.sidePages, 0), page) :
-    page > 1 ? [page - 1] : [];
+    range(Math.max(page - o.sidePages, 1), page) : [];
   var nextPages = o.sidePages ?
-    range(page + 1, Math.min(page + o.sidePages + 1, pages)) :
-    page < pages - 1 ? [page + 1] : [];
-  var beginPages = o.beginPages ? range(Math.min(o.beginPages, pages)) : [];
-  var endPages = o.endPages ? range(Math.max(pages - o.endPages, 0), pages) : [];
-
-  if (beginPages.length + endPages.length >= pages) {
-    return {
-      beginPages: difference(beginPages, range(page, pages)),
-      previousPages: [],
-      centerPage: page,
-      nextPages: [],
-      endPages: difference(endPages, range(page + 1))
-    };
-  }
+    range(page + 1, Math.min(page + o.sidePages + 1, pages)) : [];
+  var beginPages = o.beginPages ? range(1, Math.min(o.beginPages, pages) + 1) : [];
+  var endPages = o.endPages ? range(Math.max(pages - o.endPages + 1, 0), pages + 1) : [];
 
   return {
-    beginPages: difference(beginPages, range(page, pages)),
+    beginPages: difference(beginPages, range(page, Math.max(pages, o.beginPages) + 1)),
     previousPages: difference(previousPages, beginPages),
     centerPage: page,
     nextPages: difference(nextPages, endPages),
