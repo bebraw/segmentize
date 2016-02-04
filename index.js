@@ -1,12 +1,12 @@
 'use strict';
 
 module.exports = function (o) {
-  const page = o.page;
-  const pages = o.pages;
-  const previousPages = o.sidePages ?
+  var page = o.page;
+  var pages = o.pages;
+  var previousPages = o.sidePages ?
     range(Math.max(page - o.sidePages, 0), page) :
     page > 1 ? [page - 1] : [];
-  const nextPages = o.sidePages ?
+  var nextPages = o.sidePages ?
     range(page + 1, Math.min(page + o.sidePages + 1, pages)) :
     page < pages - 1 ? [page + 1] : [];
   var beginPages = o.beginPages ? range(Math.min(o.beginPages, pages)) : [];
@@ -32,8 +32,8 @@ module.exports = function (o) {
 };
 
 function range(a, b) {
-  const len = b ? b : a;
-  const ret = [];
+  var len = b ? b : a;
+  var ret = [];
   var i = b ? a : 0;
 
   for (; i < len; i++) {
