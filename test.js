@@ -407,34 +407,6 @@ describe('segmentize', function () {
     });
   });
 
-  it('should accept side pages number for the first page', function () {
-    expect(segmentize({
-      page: 0,
-      pages: 15,
-      sidePages: 3
-    })).to.deep.equal({
-      beginPages: [],
-      previousPages: [],
-      centerPage: 0,
-      nextPages: [1, 2, 3],
-      endPages: []
-    });
-  });
-
-  it('should accept side pages number for the last page', function () {
-    expect(segmentize({
-      page: 14,
-      pages: 15,
-      sidePages: 3
-    })).to.deep.equal({
-      beginPages: [],
-      previousPages: [11, 12, 13],
-      centerPage: 14,
-      nextPages: [],
-      endPages: []
-    });
-  });
-
   it('should accept side pages number', function () {
     expect(segmentize({
       page: 5,
@@ -464,6 +436,66 @@ describe('segmentize', function () {
       centerPage: 0,
       nextPages: [1, 2],
       endPages: [997, 998, 999]
+    });
+  });
+
+  it('should accept side pages number for the first page', function () {
+    expect(segmentize({
+      page: 0,
+      pages: 15,
+      sidePages: 3
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [1, 2, 3],
+      endPages: []
+    });
+  });
+
+  it('should clamp to begin', function () {
+    expect(segmentize({
+      page: -1,
+      pages: 1000,
+      beginPages: 3,
+      endPages: 3,
+      sidePages: 2
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [1, 2],
+      endPages: [997, 998, 999]
+    });
+  });
+
+  it('should accept side pages number for the last page', function () {
+    expect(segmentize({
+      page: 14,
+      pages: 15,
+      sidePages: 3
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [11, 12, 13],
+      centerPage: 14,
+      nextPages: [],
+      endPages: []
+    });
+  });
+
+  it('should clamp to end', function () {
+    expect(segmentize({
+      page: 1001,
+      pages: 1000,
+      beginPages: 3,
+      endPages: 3,
+      sidePages: 2
+    })).to.deep.equal({
+      beginPages: [0, 1, 2],
+      previousPages: [997, 998],
+      centerPage: 999,
+      nextPages: [],
+      endPages: []
     });
   });
 

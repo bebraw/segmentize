@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = function (o) {
-  var page = o.page;
   var pages = o.pages;
+  var page = Math.min(Math.max(o.page, 0), pages - 1);
   var previousPages = o.sidePages ?
     range(Math.max(page - o.sidePages, 0), page) :
     page > 1 ? [page - 1] : [];
@@ -27,7 +27,7 @@ module.exports = function (o) {
     previousPages: difference(previousPages, beginPages),
     centerPage: page,
     nextPages: difference(nextPages, endPages),
-    endPages: difference(endPages, [page])
+    endPages: difference(endPages, range(0, page + 1))
   };
 };
 
