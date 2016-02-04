@@ -3,15 +3,17 @@
 
 ```javascript
 expect(segmentize({
-  page: 2,
-  pages: pageAmount,
-  beginPages: 2
+  page: 4,
+  pages: 10,
+  beginPages: 2, // optional
+  endPages: 1, // optional
+  sidePages: 1 // defaults to zero
 })).to.deep.equal({
-  beginPages: [0, 1],
-  previousPages: [],
-  centerPage: 2,
-  nextPages: [3],
-  endPages: []
+  beginPages: [1, 2], // one-indexed
+  previousPages: [3],
+  centerPage: 4,
+  nextPages: [5],
+  endPages: [10]
 });
 ```
 
