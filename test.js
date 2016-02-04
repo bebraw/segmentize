@@ -451,6 +451,22 @@ describe('segmentize', function () {
     });
   });
 
+  it('should not show begin pages', function () {
+    expect(segmentize({
+      page: 0,
+      pages: 1000,
+      beginPages: 3,
+      endPages: 3,
+      sidePages: 2
+    })).to.deep.equal({
+      beginPages: [],
+      previousPages: [],
+      centerPage: 0,
+      nextPages: [1, 2],
+      endPages: [997, 998, 999]
+    });
+  });
+
   it('should not intersect', function () {
     const property = jsc.forall(jsc.nat(), jsc.nat(), function (a, b) {
       const max = Math.max(a, b);

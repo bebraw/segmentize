@@ -23,7 +23,7 @@ module.exports = function (o) {
   }
 
   return {
-    beginPages: difference(beginPages, [page]),
+    beginPages: difference(beginPages, range(page, pages)),
     previousPages: difference(previousPages, beginPages),
     centerPage: page,
     nextPages: difference(nextPages, endPages),
