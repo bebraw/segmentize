@@ -11,7 +11,7 @@ expect(segmentize({
 })).to.deep.equal({
   beginPages: [1, 2], // one-indexed
   previousPages: [3],
-  centerPage: 4,
+  centerPage: [4], // always one page
   nextPages: [5],
   endPages: [10]
 });

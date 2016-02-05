@@ -13,7 +13,7 @@ module.exports = function (o) {
   return {
     beginPages: difference(beginPages, range(page, Math.max(pages, o.beginPages) + 1)),
     previousPages: difference(previousPages, beginPages),
-    centerPage: page,
+    centerPage: [page],
     nextPages: difference(nextPages, endPages),
     endPages: difference(endPages, range(0, page + 1))
   };

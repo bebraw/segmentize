@@ -12,7 +12,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [],
       endPages: []
     });
@@ -27,7 +27,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [],
       endPages: []
     });
@@ -42,7 +42,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [],
       endPages: []
     });
@@ -52,12 +52,12 @@ describe('segmentize', function () {
     const pageAmount = 4;
 
     expect(segmentize({
-      page: pageAmount - 1,
+      page: pageAmount,
       pages: pageAmount
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: pageAmount - 1,
+      centerPage: [pageAmount],
       nextPages: [],
       endPages: []
     });
@@ -70,7 +70,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [],
       endPages: []
     });
@@ -84,7 +84,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2],
       previousPages: [],
-      centerPage: 5,
+      centerPage: [5],
       nextPages: [],
       endPages: []
     });
@@ -94,13 +94,13 @@ describe('segmentize', function () {
     const pageAmount = 10;
 
     expect(segmentize({
-      page: pageAmount - 1,
+      page: pageAmount,
       pages: pageAmount,
       beginPages: 2
     })).to.deep.equal({
       beginPages: [1, 2],
       previousPages: [],
-      centerPage: pageAmount - 1,
+      centerPage: [pageAmount],
       nextPages: [],
       endPages: []
     });
@@ -114,7 +114,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1],
       previousPages: [],
-      centerPage: 2,
+      centerPage: [2],
       nextPages: [],
       endPages: []
     });
@@ -128,7 +128,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 5,
+      centerPage: [5],
       nextPages: [],
       endPages: [9, 10]
     });
@@ -142,7 +142,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [],
       endPages: [9, 10]
     });
@@ -158,7 +158,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: pageAmount - 3,
+      centerPage: [pageAmount - 3],
       nextPages: [],
       endPages: [pageAmount - 1, pageAmount]
     });
@@ -173,7 +173,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2],
       previousPages: [],
-      centerPage: 5,
+      centerPage: [5],
       nextPages: [],
       endPages: [9, 10]
     });
@@ -188,7 +188,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [],
       endPages: []
     });
@@ -203,7 +203,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [],
       endPages: [2]
     });
@@ -219,7 +219,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1],
       previousPages: [],
-      centerPage: 2,
+      centerPage: [2],
       nextPages: [],
       endPages: []
     });
@@ -234,7 +234,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [],
       endPages: [2, 3]
     });
@@ -249,7 +249,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [],
       endPages: [2, 3]
     });
@@ -264,7 +264,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2, 3],
       previousPages: [],
-      centerPage: 4,
+      centerPage: [4],
       nextPages: [],
       endPages: [5, 6]
     });
@@ -279,7 +279,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2, 3],
       previousPages: [],
-      centerPage: 9,
+      centerPage: [9],
       nextPages: [],
       endPages: [10, 11]
     });
@@ -294,7 +294,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1],
       previousPages: [],
-      centerPage: 2,
+      centerPage: [2],
       nextPages: [],
       endPages: [9, 10, 11]
     });
@@ -310,7 +310,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2],
       previousPages: [],
-      centerPage: 3,
+      centerPage: [3],
       nextPages: [],
       endPages: [5, 6, 7]
     });
@@ -326,7 +326,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2, 3],
       previousPages: [],
-      centerPage: 4,
+      centerPage: [4],
       nextPages: [],
       endPages: [5, 6, 7]
     });
@@ -341,7 +341,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2, 3],
       previousPages: [],
-      centerPage: 4,
+      centerPage: [4],
       nextPages: [],
       endPages: [8, 9, 10]
     });
@@ -356,7 +356,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2, 3],
       previousPages: [],
-      centerPage: 5,
+      centerPage: [5],
       nextPages: [],
       endPages: [8, 9, 10]
     });
@@ -370,7 +370,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [3, 4],
-      centerPage: 5,
+      centerPage: [5],
       nextPages: [6, 7],
       endPages: []
     });
@@ -386,7 +386,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2],
       previousPages: [3, 4],
-      centerPage: 5,
+      centerPage: [5],
       nextPages: [6, 7],
       endPages: [14, 15]
     });
@@ -402,7 +402,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [2, 3],
       endPages: [998, 999, 1000]
     });
@@ -416,7 +416,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [2, 3, 4],
       endPages: []
     });
@@ -432,7 +432,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [],
-      centerPage: 1,
+      centerPage: [1],
       nextPages: [2, 3],
       endPages: [998, 999, 1000]
     });
@@ -446,7 +446,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [],
       previousPages: [12, 13, 14],
-      centerPage: 15,
+      centerPage: [15],
       nextPages: [],
       endPages: []
     });
@@ -462,7 +462,7 @@ describe('segmentize', function () {
     })).to.deep.equal({
       beginPages: [1, 2, 3],
       previousPages: [998, 999],
-      centerPage: 1000,
+      centerPage: [1000],
       nextPages: [],
       endPages: []
     });
