@@ -20,6 +20,11 @@
     "jsverify": "^0.7.1",
     "mocha": "^2.3.4"
   },
+  "files": [
+    "*.md",
+    "./index.js",
+    "./LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/bebraw/segmentize.git"
